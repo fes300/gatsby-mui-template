@@ -1,8 +1,15 @@
-## **template**website\_\_name
+## gatsby template
+
+this project was created using a gatsby starter, to generate a project with the same starter use:
+
+```sh
+gatsby new myproject https://github.com/fes300/gatsby-mui-template.git
+```
+
+## start project
 
 - install deps: `yarn`
 - start project: `yarn start`
-- rename project: `yarn rename myproject (lowercase, no spaces, no special chars)
 
 ## Conventions & processes
 
