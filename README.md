@@ -2,6 +2,7 @@
 
 - install deps: `yarn`
 - start project: `yarn start`
+- rename project: `yarn rename myproject (lowercase, no spaces, no special chars)
 
 ## Conventions & processes
 
