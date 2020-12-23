@@ -25,18 +25,6 @@ module.exports = {
         icon: "static/favicon-32x32.png",
       },
     },
-    {
-      resolve: "gatsby-plugin-eslint",
-      options: {
-        test: /\.ts$|\.tsx$/,
-        exclude: /(node_modules|.cache|public)/,
-        stages: ["develop"],
-        options: {
-          emitWarning: true,
-          failOnError: false,
-        },
-      },
-    },
     `gatsby-plugin-next-seo`,
     `gatsby-plugin-typescript`,
     `gatsby-theme-material-ui`,
