@@ -1,6 +1,5 @@
 import * as React from "react"
 import cx from "classnames"
-import { noop } from "../../utils/function"
 import { makeStyles } from "@material-ui/core"
 
 interface Props {
@@ -8,12 +7,15 @@ interface Props {
   grow?: boolean
   className?: string
   onClick?: React.EventHandler<React.MouseEvent<HTMLDivElement>>
+  onMouseDown?: React.EventHandler<React.MouseEvent<HTMLDivElement, MouseEvent>>
+  onMouseUp?: React.EventHandler<React.MouseEvent<HTMLDivElement, MouseEvent>>
   vAlign?: "start" | "end" | "between" | "evenly" | "around" | "center"
   hAlign?: "start" | "end" | "center"
   style?: React.CSSProperties
+  children?: React.ReactNode
 }
 
-const useStyles = makeStyles((t) => ({
+const useStyles = makeStyles(() => ({
   column: {
     display: "flex",
     flexDirection: "column",
@@ -54,41 +56,49 @@ const useStyles = makeStyles((t) => ({
   },
 }))
 
-const Column: React.FC<Props> = ({
-  className,
-  grow,
-  centered,
-  children,
-  hAlign,
-  vAlign,
-  style,
-  onClick = noop,
-}) => {
-  const classes = useStyles()
+const Column = React.forwardRef<HTMLDivElement, Props>(
+  (
+    {
+      className,
+      grow,
+      centered,
+      children,
+      hAlign,
+      vAlign,
+      style,
+      onClick,
+      onMouseDown,
+      onMouseUp,
+    },
+    ref
+  ) => {
+    const classes = useStyles()
 
-  return (
-    <div
-      style={style}
-      onClick={(e) => {
-        onClick(e)
-      }}
-      className={cx(classes.column, className, {
-        centered,
-        grow,
-        [classes.hCenter]: hAlign === "center",
-        [classes.hStart]: hAlign === "start",
-        [classes.hEnd]: hAlign === "end",
-        [classes.vBetween]: vAlign === "between",
-        [classes.vEvenly]: vAlign === "evenly",
-        [classes.vAround]: vAlign === "around",
-        [classes.vStart]: vAlign === "start",
-        [classes.vEnd]: vAlign === "end",
-        [classes.vCenter]: vAlign === "center",
-      })}
-    >
-      {children}
-    </div>
-  )
-}
+    return (
+      <div
+        style={style}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        onClick={onClick}
+        ref={ref}
+        className={cx(classes.column, className, {
+          [classes.centered]: centered,
+          [classes.grow]: grow,
+          [classes.hCenter]: hAlign === "center",
+          [classes.hStart]: hAlign === "start",
+          [classes.hEnd]: hAlign === "end",
+          [classes.vBetween]: vAlign === "between",
+          [classes.vEvenly]: vAlign === "evenly",
+          [classes.vAround]: vAlign === "around",
+          [classes.vStart]: vAlign === "start",
+          [classes.vEnd]: vAlign === "end",
+          [classes.vCenter]: vAlign === "center",
+        })}
+      >
+        {children}
+      </div>
+    )
+  }
+)
 
 export default Column
