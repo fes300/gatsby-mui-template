@@ -2,15 +2,11 @@ import React from "react"
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer"
 import Button from "@material-ui/core/Button"
 import cx from "classnames"
-import {
-  AppBar,
-  IconButton,
-  makeStyles,
-  Toolbar,
-  Typography,
-} from "@material-ui/core"
+import { AppBar, makeStyles, Toolbar, Typography } from "@material-ui/core"
+import { IconButton } from "gatsby-theme-material-ui"
 import Column from "../../Column"
 import Row from "../../Row"
+import MenuItem from "../MenuItem"
 
 const useStyles = makeStyles((t) => ({
   appBar: {
@@ -81,14 +77,16 @@ const MobileHeader = () => {
               color="inherit"
               aria-label="menu"
               disableRipple
-              onClick={() => window.scrollTo({ top: 0 })}
+              to={"/"}
             >
               <Typography variant={"h4"}>logoIcon</Typography>
             </IconButton>
           </Row>
 
           <Button disableRipple onClick={toggleDrawer(!isOpen)}>
-            <Typography variant={"h4"}>menuIcon</Typography>
+            <Typography color={"secondary"} variant={"h4"}>
+              menuIcon
+            </Typography>
           </Button>
         </Toolbar>
       </AppBar>
@@ -101,37 +99,33 @@ const MobileHeader = () => {
         transitionDuration={{ enter: drawerAnimationTime, exit: 300 }}
       >
         <Column grow>
-          <Row hAlign={"between"} className={cx(classes.drawer)}>
-            <Typography variant={"h4"}>logoIcon</Typography>
+          <Row
+            hAlign={"between"}
+            className={cx(classes.drawer, {
+              [classes.drawerHeaderActive]: triggerAnimation,
+            })}
+          >
+            <Typography color={"secondary"} variant={"h4"}>
+              logoIcon
+            </Typography>
 
             <Button disableRipple onClick={toggleDrawer(!isOpen)}>
-              <Typography variant={"h4"}>closeIcon</Typography>
+              <Typography color={"secondary"} variant={"h4"}>
+                closeIcon
+              </Typography>
             </Button>
           </Row>
 
           <Column vAlign={"center"} grow style={{ marginRight: "-25px" }}>
             <Row hAlign={"end"}>
-              <Button
+              <MenuItem
+                to="/about"
+                label="About us"
+                variant={"h3"}
                 className={cx(classes.menuItem, classes.transitionDelay1, {
                   [classes.menuItemActive]: triggerAnimation,
                 })}
-                disableRipple
-                color="inherit"
-              >
-                <Column>
-                  <Typography
-                    variant={"h3"}
-                    style={{
-                      marginTop: 0,
-                      fontSize: 26,
-                      textTransform: "none",
-                    }}
-                    color={"inherit"}
-                  >
-                    Example menu item
-                  </Typography>
-                </Column>
-              </Button>
+              />
             </Row>
           </Column>
         </Column>

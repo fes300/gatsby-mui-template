@@ -1,8 +1,9 @@
 import * as React from "react"
 import MobileHeader from "./MobileHeader"
 import DesktopHeader from "./DesktopHeader"
+interface Props {}
 
-const Header = () => {
+const Header: React.FC<Props> = () => {
   return (
     <>
       <DesktopHeader />

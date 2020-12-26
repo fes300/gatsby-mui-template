@@ -18,7 +18,7 @@ const useStyles = makeStyles((t) => ({
     marginTop: `${t.constants.mobileHeaderHeight}px`,
     minHeight: `calc(100vh - ${t.constants.mobileHeaderHeight}px)`,
 
-    [t.breakpoints.up("sm")]: {
+    [t.breakpoints.up("md")]: {
       marginTop: `${t.constants.desktopHeaderHeight}px`,
       minHeight: `calc(100vh - ${t.constants.desktopHeaderHeight}px)`,
     },

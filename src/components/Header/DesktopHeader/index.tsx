@@ -1,17 +1,16 @@
 import {
   AppBar,
   Box,
-  IconButton,
   makeStyles,
   Toolbar,
   Typography,
-  Button,
   Container,
 } from "@material-ui/core"
 import * as React from "react"
 import cx from "classnames"
-import Column from "../../Column"
 import Row from "../../Row"
+import MenuItem from "../MenuItem"
+import { IconButton } from "gatsby-theme-material-ui"
 
 type Props = {}
 
@@ -19,8 +18,9 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     height: `${theme.constants.desktopHeaderHeight}px`,
     justifyContent: "center",
-    [theme.breakpoints.down("xs")]: {
-      display: "none",
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
     },
   },
   menuItemsWrapper: {
@@ -60,28 +60,19 @@ const Header: React.FC<Props> = () => {
                 color="inherit"
                 aria-label="home"
                 disableRipple
-                onClick={() => window.scrollTo({ top: 0 })}
+                to={"/"}
               >
                 <Typography variant={"h4"}>logoIcon</Typography>
               </IconButton>
             </Box>
 
             <Row centered className={classes.menuItemsWrapper}>
-              <Button
-                disableRipple
+              <MenuItem
+                to="/about"
+                label="About us"
                 className={cx(classes.menuItem)}
-                color="inherit"
-              >
-                <Column>
-                  <Typography
-                    variant={"h5"}
-                    style={{ textTransform: "none" }}
-                    color={"inherit"}
-                  >
-                    Example menu item
-                  </Typography>
-                </Column>
-              </Button>
+                variant={"h5"}
+              />
             </Row>
           </Row>
         </Container>
