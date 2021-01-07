@@ -68,8 +68,8 @@ const Header: React.FC<Props> = () => {
 
             <Row centered className={classes.menuItemsWrapper}>
               <MenuItem
-                to="/about"
-                label="About us"
+                to="/contact"
+                label="Contacts"
                 className={cx(classes.menuItem)}
                 variant={"h5"}
               />

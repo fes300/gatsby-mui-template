@@ -119,8 +119,8 @@ const MobileHeader = () => {
           <Column vAlign={"center"} grow style={{ marginRight: "-25px" }}>
             <Row hAlign={"end"}>
               <MenuItem
-                to="/about"
-                label="About us"
+                to="/contact"
+                label="Contacts"
                 variant={"h3"}
                 className={cx(classes.menuItem, classes.transitionDelay1, {
                   [classes.menuItemActive]: triggerAnimation,
