@@ -12,6 +12,10 @@ $> gatsby new myproject https://github.com/fes300/gatsby-mui-template.git
 - install deps: `yarn`
 - start project: `yarn start`
 
+### N.B.
+
+`yarn start` triggers the command `netlify dev` that does a lot of things (like injecting the dev env set in netlify backoffice into your local runtime, simulating locally your lambda functions and more)
+
 ## Conventions & processes
 
 - [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)

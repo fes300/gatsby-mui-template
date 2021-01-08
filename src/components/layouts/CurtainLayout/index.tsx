@@ -2,7 +2,6 @@ import { makeStyles } from "@material-ui/core"
 import { pipe } from "fp-ts/lib/function"
 import { Option, none, fromNullable, chainFirst } from "fp-ts/lib/Option"
 import * as React from "react"
-import ReactDOM from "react-dom"
 import Column from "../../Column"
 
 export { default as CurtainWrapper } from "./CurtainWrapper"
@@ -16,6 +15,7 @@ type Props = {
 const useStyles = makeStyles((t) => ({
   curtain: {
     zIndex: 2,
+    overflow: "scroll",
   },
   transparentSection: {
     zIndex: 2,
@@ -86,7 +86,12 @@ export const CurtainLayout: React.FC<Props> = (props) => {
             transparentRef,
             chainFirst((tr) => {
               tr.style.setProperty("pointer-events", "none")
-              document.elementFromPoint(e.clientX, e.clientY)?.click()
+              const el = document.elementFromPoint(e.clientX, e.clientY)
+
+              if (el && (el as any).click) {
+                el.click()
+              }
+
               tr.style.setProperty("pointer-events", "all")
               return none
             })
