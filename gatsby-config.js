@@ -26,7 +26,13 @@ module.exports = {
       },
     },
     `gatsby-plugin-next-seo`,
-    `gatsby-plugin-typescript`,
+    {
+      resolve: `gatsby-plugin-ts`,
+      options: {
+        codegen: false,
+        failOnError: true,
+      },
+    },
     `gatsby-theme-material-ui`,
   ],
 }

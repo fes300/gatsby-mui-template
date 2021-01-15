@@ -89,7 +89,7 @@ export const CurtainLayout: React.FC<Props> = (props) => {
               const el = document.elementFromPoint(e.clientX, e.clientY)
 
               if (el && (el as any).click) {
-                el.click()
+                ;(el as any).click()
               }
 
               tr.style.setProperty("pointer-events", "all")

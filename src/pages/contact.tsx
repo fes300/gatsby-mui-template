@@ -11,7 +11,6 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
-  Grid,
   makeStyles,
   Snackbar,
   TextField,
@@ -63,15 +62,7 @@ const Contact: React.FC<PageProps> = () => {
     },
   })
 
-  const onSubmit = ({
-    name,
-    email,
-    company,
-    message,
-    privacyCheck,
-  }: Inputs) => {
-    console.log(privacyCheck)
-
+  const onSubmit = ({ name, email, company, message }: Inputs) => {
     setLoading(true)
 
     sendEmail({ name, email, company: company ?? "", message })
