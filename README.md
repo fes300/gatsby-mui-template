@@ -10,6 +10,7 @@ $> gatsby new myproject https://github.com/fes300/gatsby-mui-template.git
 
 - init git: `git init` (N.B. it is important to do this before the deps install so that husky can write its custom hooks)
 - install deps: `yarn`
+- rename your project: `make rename name=$(YOUR_WEBSITE_NAME)`
 - start project: `yarn start`
 
 ### N.B.

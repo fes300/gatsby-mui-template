@@ -54,7 +54,6 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md,ts,tsx}\"",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "rename": "./scripts/rename-project.sh",
     "postinstall": "netlify-lambda install",
     "build:lambda": "netlify-lambda build lambda",
     "start:lambda": "netlify-lambda serve lambda",
