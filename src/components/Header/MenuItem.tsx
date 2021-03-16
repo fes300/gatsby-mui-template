@@ -1,24 +1,47 @@
-import { makeStyles, Typography } from "@material-ui/core"
+import { makeStyles, Typography, useTheme } from "@material-ui/core"
 import { Button } from "gatsby-theme-material-ui"
 import * as React from "react"
 import { useMatch } from "@reach/router"
 import cx from "classnames"
 import { Variant } from "@material-ui/core/styles/createTypography"
+import { Section } from "."
+import { scrollToId } from "../../utils/dom"
+import { noop } from "../../utils/function"
 
-type Props = {
-  to: string
+type SharedProps = {
+  toggleDrawer?: (open: boolean) => React.EventHandler<any>
   className?: string
   label: string
   variant: Variant
 }
 
-const useStyles = makeStyles((t) => ({
+type PageProps = SharedProps & {
+  to: string
+}
+
+type ScrollProps = SharedProps & {
+  scrollTo: Section
+}
+
+type Props = PageProps | ScrollProps
+
+const isPageProps = (p: Props): p is PageProps => {
+  return (p as any).to !== undefined
+}
+
+const useStyles = makeStyles(() => ({
   menuItemCurrent: {
     color: "red",
   },
 }))
 
-const MenuItem: React.FC<Props> = ({ to, label, className, variant }) => {
+const PageLink: React.FC<PageProps> = ({
+  toggleDrawer,
+  to,
+  label,
+  className,
+  variant,
+}) => {
   const classes = useStyles()
   const isCurrent = useMatch(to)
 
@@ -27,6 +50,7 @@ const MenuItem: React.FC<Props> = ({ to, label, className, variant }) => {
       className={cx(className, {
         [classes.menuItemCurrent]: isCurrent,
       })}
+      onClick={toggleDrawer !== undefined ? toggleDrawer(false) : noop}
       disableRipple
       color="inherit"
       to={to}
@@ -41,6 +65,46 @@ const MenuItem: React.FC<Props> = ({ to, label, className, variant }) => {
         {label}
       </Typography>
     </Button>
+  )
+}
+
+const ScrollLink: React.FC<ScrollProps> = ({
+  toggleDrawer,
+  scrollTo,
+  label,
+  className,
+  variant,
+}) => {
+  const theme = useTheme()
+
+  return (
+    <Button
+      className={className}
+      disableRipple
+      color="inherit"
+      onClick={(e) => {
+        scrollToId(scrollTo, theme.constants.mobileHeaderHeight * 0.7)
+        if (toggleDrawer !== undefined) toggleDrawer(false)(e)
+      }}
+    >
+      <Typography
+        variant={variant}
+        style={{
+          textTransform: "none",
+        }}
+        color={"inherit"}
+      >
+        {label}
+      </Typography>
+    </Button>
+  )
+}
+
+const MenuItem: React.FC<Props> = (props) => {
+  return isPageProps(props) ? (
+    <PageLink {...props} />
+  ) : (
+    <ScrollLink {...props} />
   )
 }
 

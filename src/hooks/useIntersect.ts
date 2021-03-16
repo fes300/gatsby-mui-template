@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
 interface Input {
   root?: Element | null
@@ -10,8 +10,11 @@ const useIntersect = ({
   root = null,
   rootMargin = "0px",
   threshold = 0,
-}: Input) => {
-  const [entry, updateEntry] = useState({})
+}: Input): [
+  React.Dispatch<React.SetStateAction<Element | null>>,
+  IntersectionObserverEntry | null
+] => {
+  const [entry, updateEntry] = useState<IntersectionObserverEntry | null>(null)
   const [nodeRef, setNodeRef] = useState<Element | null>(null)
   const observer = useRef<null | IntersectionObserver>(null)
 

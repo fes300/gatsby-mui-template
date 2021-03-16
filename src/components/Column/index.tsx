@@ -6,6 +6,7 @@ interface Props {
   centered?: boolean
   grow?: boolean
   className?: string
+  id?: string
   onClick?: React.EventHandler<React.MouseEvent<HTMLDivElement>>
   onMouseDown?: React.EventHandler<React.MouseEvent<HTMLDivElement, MouseEvent>>
   onMouseUp?: React.EventHandler<React.MouseEvent<HTMLDivElement, MouseEvent>>
@@ -69,6 +70,7 @@ const Column = React.forwardRef<HTMLDivElement, Props>(
       onClick,
       onMouseDown,
       onMouseUp,
+      id,
     },
     ref
   ) => {
@@ -76,6 +78,7 @@ const Column = React.forwardRef<HTMLDivElement, Props>(
 
     return (
       <div
+        id={id}
         style={style}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}

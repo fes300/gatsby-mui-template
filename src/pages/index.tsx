@@ -13,10 +13,27 @@ function Index(): ReactElement {
         <CookieBanner />
 
         <Section>
-          <Column centered style={{ padding: "80px 0" }}>
+          <Column centered style={{ padding: "80px 0", minHeight: "120vh" }}>
             __template__website__name
           </Column>
         </Section>
+
+        <Section id={"contacts"}>
+          <Column
+            centered
+            style={{
+              backgroundColor: "red",
+              padding: "80px 0",
+              minHeight: "120vh",
+            }}
+          >
+            contacts
+          </Column>
+        </Section>
+
+        <Column centered style={{ padding: "80px 0", minHeight: "220vh" }}>
+          padding bottom
+        </Column>
       </PageLayout>
     </>
   )

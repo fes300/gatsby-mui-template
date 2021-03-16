@@ -6,6 +6,7 @@ type Props = {
   background?: string
   noContainer?: boolean
   className?: string
+  id?: string
 }
 
 const Section: React.FC<Props> = ({
@@ -13,10 +14,12 @@ const Section: React.FC<Props> = ({
   noContainer,
   children,
   className,
+  id,
 }) => {
   return (
     <Column
       className={className}
+      id={id}
       style={{
         background,
       }}

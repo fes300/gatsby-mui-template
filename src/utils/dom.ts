@@ -16,3 +16,7 @@ export const scrollToId = (id: string, topMargin: number = 0) => {
 
 export const eitherWindow =
   typeof window !== `undefined` ? right(window) : left(null)
+
+export const isEntryNotScrolledYet = (e: IntersectionObserverEntry) => {
+  return (e?.boundingClientRect.top ?? 0) > 0
+}
