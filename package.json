@@ -51,7 +51,7 @@
   "license": "MIT",
   "scripts": {
     "type-check": "tsc --noEmit",
-    "build": "gatsby build",
+    "build": "export CHOKIDAR_USEPOLLING=1 && gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md,ts,tsx}\"",
     "serve": "gatsby serve",

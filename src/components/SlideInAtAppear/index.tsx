@@ -8,25 +8,28 @@ interface Props {
   distance?: number | string
   delay?: number
   position?: "top" | "left"
+  animationTime?: string
 }
 
 interface StyleProps {
   distance: number | string
   delay: number
   position: "top" | "left"
+  animationTime?: string
 }
 
 const useStyles = makeStyles<Theme, StyleProps>(() => ({
   wrapper: {
     position: "relative",
   },
-  slideIn: ({ delay, distance, position }) => {
+  slideIn: ({ animationTime, delay, distance, position }) => {
     return {
+      width: "100%",
       transitionDelay: `${delay}ms`,
       opacity: 0,
       position: "absolute",
       [position]: distance,
-      transition: "all .7s linear",
+      transition: `all ${animationTime} ease-in`,
     }
   },
   slideInOn: ({ position }) => ({
@@ -40,8 +43,9 @@ const SlideInAtAppear: React.FC<Props> = ({
   distance = 60,
   position = "top",
   children,
+  animationTime = "0.7s",
 }) => {
-  const classes = useStyles({ delay, distance, position })
+  const classes = useStyles({ delay, distance, position, animationTime })
   const [show, setShow] = React.useState(false)
   const [setNodeRef, entry] = useIntersect({})
 
@@ -59,7 +63,7 @@ const SlideInAtAppear: React.FC<Props> = ({
       >
         {children}
       </Column>
-      <div style={{ opacity: 0 }}>{children}</div>
+      <Column style={{ opacity: 0 }}>{children}</Column>
     </Column>
   )
 }
