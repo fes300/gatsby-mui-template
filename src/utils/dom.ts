@@ -20,3 +20,6 @@ export const eitherWindow =
 export const isEntryNotScrolledYet = (e: IntersectionObserverEntry) => {
   return (e?.boundingClientRect.top ?? 0) > 0
 }
+
+export const getEitherDocument = () =>
+  typeof document !== `undefined` ? right(document) : left(null)

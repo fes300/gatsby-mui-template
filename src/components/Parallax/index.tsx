@@ -1,13 +1,12 @@
 import * as React from "react"
-import * as ReactDOM from "react-dom"
 import Column from "../Column"
-import { makeStyles } from "@material-ui/core"
+import { makeStyles, Portal } from "@material-ui/core"
 import cx from "classnames"
 import useIntersect from "../../hooks/useIntersect"
 import { fade } from "@material-ui/core"
 import { pipe } from "fp-ts/es6/function"
 import { fold } from "fp-ts/Either"
-import { eitherDocument } from "../../utils/dom"
+import { getEitherDocument } from "../../utils/dom"
 
 interface Props {
   className?: string
@@ -52,32 +51,45 @@ const Parallax: React.FC<Props> = ({ background, children, className }) => {
   }, [exit])
 
   return pipe(
-    eitherDocument,
+    getEitherDocument(),
     fold(
-      () => null,
-      (document) => (
-        <>
-          <Column
-            ref={(ref) => {
-              setEntryNodeRef(ref)
-              setExitNodeRef(ref)
-            }}
-            className={cx(className, classes.transparent)}
-          >
-            {children}
-          </Column>
-
-          {ReactDOM.createPortal(
+      () => (
+        <Column
+          ref={(ref) => {
+            setEntryNodeRef(ref)
+            setExitNodeRef(ref)
+          }}
+          className={cx(className, classes.transparent)}
+        >
+          {children}
+        </Column>
+      ),
+      (document) => {
+        return (
+          <>
             <Column
-              style={{ opacity: showBackground ? 1 : 0 }}
-              className={cx("parallax-portal", classes.wrapper)}
+              ref={(ref) => {
+                setEntryNodeRef(ref)
+                setExitNodeRef(ref)
+              }}
+              className={cx(className, classes.transparent)}
             >
-              {background}
-            </Column>,
-            document.querySelector("body") as HTMLBodyElement
-          )}
-        </>
-      )
+              {children}
+            </Column>
+
+            <Portal
+              container={document.querySelector("body") as HTMLBodyElement}
+            >
+              <Column
+                style={{ opacity: showBackground ? 1 : 0 }}
+                className={cx("parallax-portal", classes.wrapper)}
+              >
+                {background}
+              </Column>
+            </Portal>
+          </>
+        )
+      }
     )
   )
 }

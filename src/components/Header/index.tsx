@@ -30,6 +30,11 @@ const Header: React.FC = () => {
     O.none
   )
   const [mobileRef, mobileEntry] = useIntersect({})
+  const activeButtonRef = React.useRef(activeButton)
+
+  React.useEffect(() => {
+    activeButtonRef.current = activeButton
+  }, [activeButton])
 
   React.useEffect(() => {
     if (isDesktop || mobileEntry === null) return
@@ -59,6 +64,7 @@ const Header: React.FC = () => {
     return registerIntersectionObservers({
       headerHeight,
       setActiveButton,
+      activeButtonRef,
       sections: Sections,
     })
   }, [])
