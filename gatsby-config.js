@@ -6,6 +6,9 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
@@ -16,7 +19,7 @@ module.exports = {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
-          include: /\.inline\.svg$/, // if you want to import an SVG and using it as a component (i.e. using SvgIcon)
+          include: /\.inline\.svg$/, // if you want to import an SVG and use it as a component, you need to rename it `*.inline.svg` (i.e. using SvgIcon)
         },
       },
     },
